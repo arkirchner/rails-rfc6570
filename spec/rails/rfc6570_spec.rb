@@ -6,26 +6,8 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'API'
 end
 
-module DummyEngine
-  class Engine < ::Rails::Engine
-    isolate_namespace DummyEngine
-
-    routes.draw do
-      get '/action' => 'engine#action', as: :action
-    end
-  end
-
-  class EngineController < ActionController::API
-    rfc6570_params action: %i[param3]
-    def action
-      render json: {
-        ref: action_path,
-        template: action_rfc6570,
-        template_url: action_url_rfc6570,
-        template_path: action_path_rfc6570,
-      }
-    end
-  end
+DummyEngine::Engine.routes.draw do
+  get '/action' => 'engine#action', as: :action
 end
 
 Dummy::Application.routes.draw do
@@ -46,6 +28,7 @@ Dummy::Application.routes.draw do
   mount DummyEngine::Engine => '/dummy_engine'
 end
 
+
 class APIController < ApplicationController
   def index
     render json: rfc6570_routes
@@ -61,6 +44,9 @@ class APIController < ApplicationController
       partial: test6_rfc6570.partial_expand(title: 'TITLE'),
       ignore: test6_rfc6570(ignore: %w[title]),
       expand: test6_rfc6570.expand(capture: %w[a b], title: 'TITLE'),
+      engine_template: dummy_engine.action_rfc6570,
+      engine_template_url: dummy_engine.action_url_rfc6570,
+      engine_template_path: dummy_engine.action_path_rfc6570,
     }
   end
 
@@ -70,6 +56,18 @@ class APIController < ApplicationController
     else
       super
     end
+  end
+end
+
+class DummyEngine::EngineController < DummyEngine::ApplicationController
+  rfc6570_params action: %i[param3]
+  def action
+    render json: {
+      ref: action_path,
+      template: action_rfc6570,
+      template_url: action_url_rfc6570,
+      template_path: action_path_rfc6570,
+    }
   end
 end
 

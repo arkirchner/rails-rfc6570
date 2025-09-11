@@ -19,4 +19,5 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'simplecov-cobertura'
+  gem "dummy_engine", path: "spec/dummy/dummy_engine"
 end
