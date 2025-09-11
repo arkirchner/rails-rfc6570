@@ -17,6 +17,7 @@ group :development do
 end
 
 group :test do
+  gem "dummy_engine", path: "../spec/dummy/dummy_engine"
   gem "rspec-github", require: false
   gem "rspec-rails"
   gem "simplecov"

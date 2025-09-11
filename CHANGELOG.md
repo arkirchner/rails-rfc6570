@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ---
 
 ### New
+- Support for options hash for `*_rfc6570` to support Rails Engines.
 
 ### Changes
 
@@ -17,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ### Fixes
 
 - Fix up `RouteSet#to_rfc6570` and `NamedRouteCollection#to_rfc6570`
+- Fix up `*_path_rfc6570` to include Rails Engines mount point.
 
 ### Breaks
 
