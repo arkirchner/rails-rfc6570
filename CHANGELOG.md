@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ### New
 
+- Support `*_rfc6570` to accept Hash as argument passed by Rails Engines.
+
 ### Changes
 
 ### Fixes
